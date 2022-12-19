@@ -309,7 +309,7 @@ static SocketFD acceptNewSocket(SocketFD sockfd) {
 
 static int readFromSocket(SocketFD socket, char* buffer, size_t length, int flags) {
 #ifdef NADJIEB_MJPEG_STREAMER_PLATFORM_WINDOWS
-    return ::recv(socket, buffer, (int)length, flags);
+    return ::recv((int)socket, buffer, (int)length, flags);
 #else
     return ::recv((int)socket, buffer, (int)length, flags);
 #endif
@@ -317,7 +317,7 @@ static int readFromSocket(SocketFD socket, char* buffer, size_t length, int flag
 
 static int sendViaSocket(SocketFD socket, const char* buffer, size_t length, int flags) {
 #ifdef NADJIEB_MJPEG_STREAMER_PLATFORM_WINDOWS
-    return ::send(socket, buffer, (int)length, flags);
+    return ::send((int)socket, buffer, (int)length, flags);
 #else
     return ::send((int)socket, buffer, (int)length, flags);
 #endif
