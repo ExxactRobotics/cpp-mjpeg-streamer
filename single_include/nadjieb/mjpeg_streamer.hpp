@@ -309,17 +309,17 @@ static SocketFD acceptNewSocket(SocketFD sockfd) {
 
 static int readFromSocket(SocketFD socket, char* buffer, size_t length, int flags) {
 #ifdef NADJIEB_MJPEG_STREAMER_PLATFORM_WINDOWS
-    return ::recv(socket, buffer, (int)length, flags);
+    return ::recv((int)socket, buffer, (int)length, flags);
 #else
-    return ::recv(socket, buffer, length, flags);
+    return ::recv((int)socket, buffer, (int)length, flags);
 #endif
 }
 
 static int sendViaSocket(SocketFD socket, const char* buffer, size_t length, int flags) {
 #ifdef NADJIEB_MJPEG_STREAMER_PLATFORM_WINDOWS
-    return ::send(socket, buffer, (int)length, flags);
+    return ::send((int)socket, buffer, (int)length, flags);
 #else
-    return ::send(socket, buffer, length, flags);
+    return ::send((int)socket, buffer, (int)length, flags);
 #endif
 }
 
@@ -327,7 +327,7 @@ static int pollSockets(NADJIEB_MJPEG_STREAMER_POLLFD* fds, size_t nfds, long tim
 #ifdef NADJIEB_MJPEG_STREAMER_PLATFORM_WINDOWS
     return WSAPoll(&fds[0], (ULONG)nfds, timeout);
 #elif defined NADJIEB_MJPEG_STREAMER_PLATFORM_LINUX || defined NADJIEB_MJPEG_STREAMER_PLATFORM_DARWIN
-    return poll(fds, nfds, timeout);
+    return poll(fds, nfds, (int)(timeout));
 #endif
 }
 }  // namespace net
